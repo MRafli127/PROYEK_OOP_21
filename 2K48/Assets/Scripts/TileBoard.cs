@@ -26,5 +26,6 @@ public class TileBoard : MonoBehaviour
   {
     Tile tile = Instantiate(tilePrefabs, grid.transform);
     //tile.SetState(tileStates[0], 2);
+    // error
   }
 }
