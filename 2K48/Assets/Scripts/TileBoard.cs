@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class TileBoard : MonoBehaviour
@@ -25,7 +23,8 @@ public class TileBoard : MonoBehaviour
   private void CreateTile()
   {
     Tile tile = Instantiate(tilePrefabs, grid.transform);
-    //tile.SetState(tileStates[0], 2);
-    // error
+    tile.SetState(tileStates[0]); // harusnya ada , 2 "masih bug"
+    tile.Spawn(grid.GetRandomEmptyCell());
   }
+
 }

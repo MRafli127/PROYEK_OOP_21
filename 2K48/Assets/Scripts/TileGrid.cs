@@ -19,27 +19,15 @@ public class TileGrid : MonoBehaviour
         }
     }
 
-    public TileCell GetCell(Vector2Int coordinates)
+    public void Start()
     {
-        return GetCell(coordinates.x, coordinates.y);
-    }
-
-    public TileCell GetCell(int x, int y)
-    {
-        if (x >= 0 && x < Width && y >= 0 && y < Height) {
-            return rows[y].cells[x];
-        } else {
-            return null;
+        for (int y = 0; y < rows.Length; y++)
+        {
+            for (int x = 0; x < rows [y].cells.Length; x++)
+            {
+                rows[y].cells[x].coordinates = new Vector2Int(x, y);
+            }
         }
-    }
-
-    public TileCell GetAdjacentCell(TileCell cell, Vector2Int direction)
-    {
-        Vector2Int coordinates = cell.coordinates;
-        coordinates.x += direction.x;
-        coordinates.y -= direction.y;
-
-        return GetCell(coordinates);
     }
 
     public TileCell GetRandomEmptyCell()
@@ -47,20 +35,17 @@ public class TileGrid : MonoBehaviour
         int index = Random.Range(0, cells.Length);
         int startingIndex = index;
 
-        while (cells[index].Occupied)
-        {
-            index++;
+    //while (cells[index].occopied) //error occopied
+    {
+        index++;
 
-            if (index >= cells.Length) {
-                index = 0;
-            }
-
-            // all cells are occupied
-            if (index == startingIndex) {
-                return null;
-            }
+        if (index >= cells.Length){
+            index = 0;
         }
-
+        if (index == startingIndex){
+            return null;
+        }
+    }
         return cells[index];
     }
 
