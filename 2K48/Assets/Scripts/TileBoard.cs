@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.U2D.Aseprite;
@@ -9,6 +10,7 @@ public class TileBoard : MonoBehaviour
     public TileState[] tileStates;
     private TileGrid grid;
     private List<Tile> tiles;
+    private bool wait;
 
     private void Awake()
     {
@@ -32,41 +34,50 @@ public class TileBoard : MonoBehaviour
 
   private void Update()
   {
-    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
+    if (!wait)
     {
-      MoveTiles(Vector2Int.up, 0, 1, 1, 1);
-    }
-    else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
-    {
-      MoveTiles(Vector2Int.down, 0, 1, grid.Height -2, -1);
-    }
-    else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
-    {
-      MoveTiles(Vector2Int.left, 1, 1, 0, 1);
-    }
-    else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
-    {
-      MoveTiles(Vector2Int.right, grid.Width -2, -1, 0, 1);
+      if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
+      {
+        MoveTiles(Vector2Int.up, 0, 1, 1, 1);
+      }
+      else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
+      {
+        MoveTiles(Vector2Int.down, 0, 1, grid.Height -2, -1);
+      }
+      else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
+      {
+        MoveTiles(Vector2Int.left, 1, 1, 0, 1);
+      }
+      else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
+      {
+        MoveTiles(Vector2Int.right, grid.Width -2, -1, 0, 1);
+      }
     }
   }
   
   private void MoveTiles(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
   {
-    for ( int x =  startX; x >= 0 && x < grid.Width; x += incrementX)
-    {
-      for (int y = startY; y >= 0 && y < grid.Height; y += incrementY)
+    bool changed = false;
+      for ( int x =  startX; x >= 0 && x < grid.Width; x += incrementX)
       {
-        TileCell cell = grid.GetCell(x, y);
-
-        if (cell.Occupied)
+        for (int y = startY; y >= 0 && y < grid.Height; y += incrementY)
         {
-          MoveTile(cell.tile, direction);
+          TileCell cell = grid.GetCell(x, y);
+
+          if (cell.Occupied)
+          {
+            changed |= MoveTile(cell.tile, direction);
+          }
         }
       }
-    }
+
+      if (changed)
+      {
+        StartCoroutine(WaitChanges());
+      }
   }
 
-  private void MoveTile(Tile tile, Vector2Int direction)
+  private bool MoveTile(Tile tile, Vector2Int direction)
   {
     TileCell newCell = null;
     TileCell adjecent = grid.GetAdjecentCell(tile.cell, direction);
@@ -86,6 +97,20 @@ public class TileBoard : MonoBehaviour
     if (newCell != null)
     {
       tile.MoveTo(newCell);
+      return true;
     }
+
+    return false;
+
+  }
+
+  private IEnumerator WaitChanges()
+  {
+    wait = true;
+
+    yield return new WaitForSeconds(0.1f);
+
+    wait = false;
+
   }
 }
