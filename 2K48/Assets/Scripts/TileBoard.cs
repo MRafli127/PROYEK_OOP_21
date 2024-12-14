@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class TileBoard : MonoBehaviour
@@ -23,8 +24,8 @@ public class TileBoard : MonoBehaviour
 
   private void CreateTile()
   {
-    Tile tile = Instantiate(tilePrefabs, grid.transform);// ada yang salah ini
-    tile.SetState(tileStates[0], 2); // harusnya ada , 2 "masih bug"
+    Tile tile = Instantiate(tilePrefabs, grid.transform);
+    tile.SetState(tileStates[0], 2);//fixed
     tile.Spawn(grid.GetRandomEmptyCell());
     tiles.Add(tile);
   }
@@ -33,21 +34,58 @@ public class TileBoard : MonoBehaviour
   {
     if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) 
     {
-
-    }else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
+      MoveTiles(Vector2Int.up, 0, 1, 1, 1);
+    }
+    else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
     {
-
-    }else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
+      MoveTiles(Vector2Int.down, 0, 1, grid.Height -2, -1);
+    }
+    else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
     {
-
-    }else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
+      MoveTiles(Vector2Int.left, 1, 1, 0, 1);
+    }
+    else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
     {
-
+      MoveTiles(Vector2Int.right, grid.Width -2, -1, 0, 1);
     }
   }
   
-  private void MoveTiles()
+  private void MoveTiles(Vector2Int direction, int startX, int incrementX, int startY, int incrementY)
   {
-    
+    for ( int x =  startX; x >= 0 && x < grid.Width; x += incrementX)
+    {
+      for (int y = startY; y >= 0 && y < grid.Height; y += incrementY)
+      {
+        TileCell cell = grid.GetCell(x, y);
+
+        if (cell.Occupied)
+        {
+          MoveTile(cell.tile, direction);
+        }
+      }
+    }
+  }
+
+  private void MoveTile(Tile tile, Vector2Int direction)
+  {
+    TileCell newCell = null;
+    TileCell adjecent = grid.GetAdjecentCell(tile.cell, direction);
+
+    while (adjecent != null)
+    {
+      if (adjecent.Occupied)
+      {
+        // todo merging
+        break;
+      }
+
+      newCell = adjecent;
+      adjecent = grid.GetAdjecentCell(adjecent, direction);
+    }
+
+    if (newCell != null)
+    {
+      tile.MoveTo(newCell);
+    }
   }
 }
