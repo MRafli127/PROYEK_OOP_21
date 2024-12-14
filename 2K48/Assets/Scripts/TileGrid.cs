@@ -35,7 +35,7 @@ public class TileGrid : MonoBehaviour
         int index = Random.Range(0, cells.Length);
         int startingIndex = index;
 
-    //while (cells[index].occopied) //error occopied
+    while (cells[index].Occupied) //error occopied //fixed to Occupied
     {
         index++;
 
