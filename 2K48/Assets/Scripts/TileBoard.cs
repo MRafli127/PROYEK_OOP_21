@@ -18,13 +18,26 @@ public class TileBoard : MonoBehaviour
         tiles = new List<Tile>(16);
     }
 
+  public void ClearBoard()
+    {
+        foreach (var cell in grid.cells) {
+            cell.tile = null;
+        }
+
+        foreach (var tile in tiles) {
+            Destroy(tile.gameObject);
+        }
+
+        tiles.Clear();
+    }
+
   private void Start()
   {
         CreateTile();
         CreateTile();
   }
 
-  private void CreateTile()
+  public void CreateTile()
   {
     Tile tile = Instantiate(tilePrefabs, grid.transform);
     tile.SetState(tileStates[0], 2);//fixed
@@ -80,18 +93,22 @@ public class TileBoard : MonoBehaviour
   private bool MoveTile(Tile tile, Vector2Int direction)
   {
     TileCell newCell = null;
-    TileCell adjecent = grid.GetAdjecentCell(tile.cell, direction);
+    TileCell adjacent = grid.GetAdjacentCell(tile.cell, direction);
 
-    while (adjecent != null)
+    while (adjacent != null)
     {
-      if (adjecent.Occupied)
+      if (adjacent.Occupied)
       {
-        // todo merging
+        if (CanMerge(tile, adjacent.tile))
+          {
+            MergeTiles(tile, adjacent.tile);
+            return true;
+          }
         break;
       }
 
-      newCell = adjecent;
-      adjecent = grid.GetAdjecentCell(adjecent, direction);
+      newCell = adjacent;
+      adjacent = grid.GetAdjacentCell(adjacent, direction);
     }
 
     if (newCell != null)
@@ -103,14 +120,88 @@ public class TileBoard : MonoBehaviour
     return false;
 
   }
-
-  private IEnumerator WaitChanges()
+  //merge 
+  private bool CanMerge(Tile a, Tile b)
   {
-    wait = true;
-
-    yield return new WaitForSeconds(0.1f);
-
-    wait = false;
+    return a.number == b.number;
 
   }
+  
+  private void MergeTiles(Tile a, Tile b)
+  {
+    tiles.Remove(a);
+    a.Merge(b.cell);
+
+    int index = Mathf.Clamp(IndexOf(b.state) + 1, 0, tileStates.Length - 1);
+    int number = b.number * 2;
+
+    b.SetState(tileStates[index], number);
+
+  }
+
+  private int IndexOf(TileState state)
+    {
+        for (int i = 0; i < tileStates.Length; i++)
+        {
+            if (state == tileStates[i]) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+  private IEnumerator WaitChanges()
+    {
+        wait = true;
+
+        yield return new WaitForSeconds(0.1f);
+
+        wait = false;
+
+        foreach (var tile in tiles) {
+            tile.locked = false;
+        }
+
+        if (tiles.Count != grid.Size) {
+            CreateTile();
+        }
+
+        if (CheckForGameOver()) {
+            GameManager.Instance.GameOver();
+        }
+    }
+
+    public bool CheckForGameOver()
+    {
+        if (tiles.Count != grid.Size) {
+            return false;
+        }
+
+        foreach (var tile in tiles)
+        {
+            TileCell up = grid.GetAdjacentCell(tile.cell, Vector2Int.up);
+            TileCell down = grid.GetAdjacentCell(tile.cell, Vector2Int.down);
+            TileCell left = grid.GetAdjacentCell(tile.cell, Vector2Int.left);
+            TileCell right = grid.GetAdjacentCell(tile.cell, Vector2Int.right);
+
+            if (up != null && CanMerge(tile, up.tile)) {
+                return false;
+            }
+
+            if (down != null && CanMerge(tile, down.tile)) {
+                return false;
+            }
+
+            if (left != null && CanMerge(tile, left.tile)) {
+                return false;
+            }
+
+            if (right != null && CanMerge(tile, right.tile)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

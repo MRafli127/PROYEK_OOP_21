@@ -65,10 +65,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2048
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b38d4b9d794e7b4c952ce2d1da05908, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 0b38d4b9d794e7b4c952ce2d1da05908, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 641bff5cb74af3b4593ee281eff95c31, type: 2}
+  m_sharedMaterial: {fileID: -6573852210645512854, guid: 641bff5cb74af3b4593ee281eff95c31, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 8192
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 05e2a44591c49e94284ac57eac44a619, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: b46298ce4d83730499f39bd0eefa8266, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1640093216418750157
 MonoBehaviour:
   m_ObjectHideFlags: 0

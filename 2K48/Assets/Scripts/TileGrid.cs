@@ -48,7 +48,7 @@ public class TileGrid : MonoBehaviour
         return GetCell(coordinates.x, coordinates.y);
     }
 
-    public TileCell GetAdjecentCell(TileCell cell, Vector2Int direction)
+    public TileCell GetAdjacentCell(TileCell cell, Vector2Int direction)
     {
         Vector2Int coordinates = cell.coordinates;
         coordinates.x += direction.x;
