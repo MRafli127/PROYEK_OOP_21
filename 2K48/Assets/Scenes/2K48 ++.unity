@@ -3721,6 +3721,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 700345608}
   gameOver: {fileID: 1230273013}
+  scoreText: {fileID: 859048363}
+  hiscoreText: {fileID: 1794633511}
   fadeDuration: 0.5
 --- !u!4 &2100912011
 Transform:

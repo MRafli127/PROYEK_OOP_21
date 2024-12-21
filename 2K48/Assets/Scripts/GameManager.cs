@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
 
     public TileBoard board;
     public CanvasGroup gameOver;
-    public TextMeshProGUI scoreText;
-    public TextMeshProGUI hiscoreText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI hiscoreText;
 
-    private int score;
+    private int score ;
 
     [SerializeField] private float fadeDuration = 0.5f; // Configurable fade duration
 
@@ -103,13 +103,13 @@ public class GameManager : MonoBehaviour
 
         if(score > hiscore)
         {
-            PlayerPrefs.SetInt("hiscore", score)
+            PlayerPrefs.SetInt("hiscore", score);
         }
     }
 
     private int LoadHiscore()
     {
-        return PlayerPrefs.GetInt("hiscore", 0)
+        return PlayerPrefs.GetInt("hiscore", 0);
     }
-    return mer
+
 }

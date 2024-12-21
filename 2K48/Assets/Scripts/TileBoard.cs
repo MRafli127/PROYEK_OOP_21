@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class TileBoard : MonoBehaviour
@@ -137,9 +135,10 @@ public class TileBoard : MonoBehaviour
 
     b.SetState(tileStates[index], number);
 
-    gameManager.IncreaseScore(number);
+    GameManager.Instance.IncreaseScore(number);
 
   }
+
 
   private int IndexOf(TileState state)
     {
