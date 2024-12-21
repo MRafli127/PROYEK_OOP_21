@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 
     public TileBoard board;
     public CanvasGroup gameOver;
+    public TextMeshProGUI scoreText;
+    public TextMeshProGUI hiscoreText;
+
+    private int score;
 
     [SerializeField] private float fadeDuration = 0.5f; // Configurable fade duration
 
@@ -41,6 +45,9 @@ public class GameManager : MonoBehaviour
     {
         // Reset score (if applicable)
         // Hide game over screen
+        SetScore(0);
+        hiscoreText.text = LoadHiscore().ToString();
+        
         gameOver.alpha = 0f;
         gameOver.interactable = false;
 
@@ -75,4 +82,34 @@ public class GameManager : MonoBehaviour
 
         canvasGroup.alpha = to;
     }
+
+    public void IncreaseScore(int points)
+    {
+        SetScore(score + points);
+    }
+
+    private void SetScore(int score)
+    {
+        this.score = score;
+
+        scoreText.text = score.ToString();
+
+        SaveHiscore();
+    }
+
+    private void SaveHiscore()
+    {
+        int hiscore = LoadHiscore ();
+
+        if(score > hiscore)
+        {
+            PlayerPrefs.SetInt("hiscore", score)
+        }
+    }
+
+    private int LoadHiscore()
+    {
+        return PlayerPrefs.GetInt("hiscore", 0)
+    }
+    return mer
 }
