@@ -822,7 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f434213b62ac95c4c99ee761a1fec6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs: {fileID: 1640093216418750157, guid: 8857c3a133b77a8408cb1008e9b7a936, type: 3}
+  tilePrefab: {fileID: 1640093216418750157, guid: 8857c3a133b77a8408cb1008e9b7a936, type: 3}
   tileStates:
   - {fileID: 11400000, guid: b221b7f79ac2dae4880f719972d486f0, type: 2}
   - {fileID: 11400000, guid: 33eb6bd5a8dd79140851fcb5764871ec, type: 2}
