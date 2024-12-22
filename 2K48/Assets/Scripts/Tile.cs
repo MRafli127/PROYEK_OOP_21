@@ -18,6 +18,7 @@ public class Tile : MonoBehaviour
         text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
+    //Set Number on tile
     public void SetState(TileState state)
     {
         this.state = state;
@@ -27,6 +28,7 @@ public class Tile : MonoBehaviour
         text.text = state.number.ToString();
     }
 
+    //Random Tile Spawn On board
     public void Spawn(TileCell cell)
     {
         if (this.cell != null) {
@@ -39,6 +41,7 @@ public class Tile : MonoBehaviour
         transform.position = cell.transform.position;
     }
 
+    //Moving behaviour
     public void MoveTo(TileCell cell)
     {
         if (this.cell != null) {
@@ -51,6 +54,7 @@ public class Tile : MonoBehaviour
         StartCoroutine(Animate(cell.transform.position, false));
     }
 
+    //Merge Tile
     public void Merge(TileCell cell)
     {
         if (this.cell != null) {
@@ -63,6 +67,7 @@ public class Tile : MonoBehaviour
         StartCoroutine(Animate(cell.transform.position, true));
     }
 
+    //Animation For smooth Moving
     private IEnumerator Animate(Vector3 to, bool merging)
     {
         float elapsed = 0f;
@@ -79,6 +84,7 @@ public class Tile : MonoBehaviour
 
         transform.position = to;
 
+        //When 
         if (merging) {
             Destroy(gameObject);
         }

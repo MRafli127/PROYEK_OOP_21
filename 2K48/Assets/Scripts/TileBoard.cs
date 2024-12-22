@@ -17,6 +17,7 @@ public class TileBoard : MonoBehaviour
         tiles = new List<Tile>(16);
     }
 
+    //Clear the board for every new game
     public void ClearBoard()
     {
         foreach (var cell in grid.cells) {
@@ -30,6 +31,7 @@ public class TileBoard : MonoBehaviour
         tiles.Clear();
     }
 
+    //Tile Creation
     public void CreateTile()
     {
         Tile tile = Instantiate(tilePrefab, grid.transform);
@@ -38,9 +40,10 @@ public class TileBoard : MonoBehaviour
         tiles.Add(tile);
     }
 
+    //Key For movement
     private void Update()
     {
-        if (waiting) return;
+        if (waiting) return; //Prevent Movement when animation not done
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) {
             Move(Vector2Int.up, 0, 1, 1, 1);
@@ -74,6 +77,7 @@ public class TileBoard : MonoBehaviour
         }
     }
 
+    //Move Behaviour
     private bool MoveTile(Tile tile, Vector2Int direction)
     {
         TileCell newCell = null;
@@ -110,6 +114,7 @@ public class TileBoard : MonoBehaviour
         return a.state == b.state && !b.locked;
     }
 
+    //Merge Tiles State
     private void MergeTiles(Tile a, Tile b)
     {
         tiles.Remove(a);
@@ -155,6 +160,7 @@ public class TileBoard : MonoBehaviour
         }
     }
 
+    //Check when the Board is Full and not able to move
     public bool CheckForGameOver()
     {
         if (tiles.Count != grid.Size) {

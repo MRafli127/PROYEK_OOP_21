@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<Timer>().ResetTimer(); 
     }
 
+    //Game Over when Board Full
     public void GameOver()
     {
         board.enabled = false;
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
         SaveHiscore();
     }
 
+    //Save Score if the new highest
     private void SaveHiscore()
     {
         int hiscore = LoadHiscore ();
@@ -114,6 +116,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Load High Score
     private int LoadHiscore()
     {
         return PlayerPrefs.GetInt("hiscore", 0);

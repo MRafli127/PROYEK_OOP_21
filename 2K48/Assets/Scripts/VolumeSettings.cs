@@ -18,6 +18,8 @@ public class VolumeSettings : MonoBehaviour
         }
         
     }
+
+    //Set Volume with slider
     public void SetVolume()
     {
         float volume = MusicSlider.value;

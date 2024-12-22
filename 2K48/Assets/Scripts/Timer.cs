@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     float elapsedTime;
 
+    //Timer
     void Update()
     {
         elapsedTime += Time.deltaTime;
@@ -17,6 +18,7 @@ public class Timer : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+    //Reset Timer For every new game
     public void ResetTimer()
     {
         elapsedTime = 0f;
