@@ -9,17 +9,9 @@ public class Scene : MonoBehaviour
     [SerializeField] private GameObject mainMenu;     // Reference to the Main Menu (Optional)
 
     // Automatically hide the Settings Menu when the game starts
-    private void Awake()
+    public void MainMenuButton()
     {
-        if (settingsMenu != null)
-        {
-            settingsMenu.SetActive(false); // Hide the Settings Menu
-        }
-
-        if (mainMenu != null)
-        {
-            mainMenu.SetActive(true); // Ensure the Main Menu is visible
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     // Start the game button

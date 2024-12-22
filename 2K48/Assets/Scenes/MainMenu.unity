@@ -289,7 +289,7 @@ RectTransform:
   m_Father: {fileID: 1533079950}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -490,17 +490,17 @@ MonoBehaviour:
   m_FillRect: {fileID: 345436811}
   m_HandleRect: {fileID: 1998005855}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1326988528}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: set_volume
-        m_Mode: 0
+      - m_Target: {fileID: 1843348226}
+        m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -934,7 +934,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1652,7 +1652,7 @@ AudioSource:
   m_GameObject: {fileID: 1326988527}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 424110fbbae3a7d47be60d783143e31a, type: 2}
   m_audioClip: {fileID: 8300000, guid: bc523f2c90d8d4846917abfec2181f20, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -1764,6 +1764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353198861}
   - component: {fileID: 1353198862}
+  - component: {fileID: 1353198863}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1803,6 +1804,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 0}
   mainMenu: {fileID: 0}
+--- !u!114 &1353198863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353198860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b5c764af98bb44a9847b73e69c90f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mymixer: {fileID: 24100000, guid: 424110fbbae3a7d47be60d783143e31a, type: 2}
+  MusicSlider: {fileID: 425250166}
 --- !u!1 &1533079949
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,6 +2351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1843348224}
   - component: {fileID: 1843348225}
+  - component: {fileID: 1843348226}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -2374,6 +2390,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 0}
   mainMenu: {fileID: 0}
+--- !u!114 &1843348226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843348223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b5c764af98bb44a9847b73e69c90f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mymixer: {fileID: 24100000, guid: 424110fbbae3a7d47be60d783143e31a, type: 2}
+  MusicSlider: {fileID: 425250166}
 --- !u!1 &1998005854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,8 +2436,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 961978662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
