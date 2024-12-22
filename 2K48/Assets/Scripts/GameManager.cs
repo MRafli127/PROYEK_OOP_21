@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI hiscoreText;
 
+
     private int score ;
 
     [SerializeField] private float fadeDuration = 0.5f; // Configurable fade duration
@@ -56,12 +57,18 @@ public class GameManager : MonoBehaviour
         board.CreateTile();
         board.CreateTile();
         board.enabled = true;
+
+        FindObjectOfType<Timer>().enabled = true;
+
+        FindObjectOfType<Timer>().ResetTimer(); 
     }
 
     public void GameOver()
     {
         board.enabled = false;
         gameOver.interactable = true;
+
+        FindObjectOfType<Timer>().enabled = false; //stop timer if gameover
 
         StartCoroutine(Fade(gameOver, 1f, fadeDuration));
     }
