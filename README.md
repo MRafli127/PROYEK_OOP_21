@@ -22,3 +22,6 @@ Pemain harus berhati-hati dalam merencanakan langkahnya, karena papan bisa menja
 | [**@Raddief Ezra Satrio Andaru**](https://github.com/Raddief)| 2306250693 |
 | [**@Muhammad Rafli**](https://github.com/MRafli127)| 2306250730 |
 | [**@Izzan Nawa Syarif**](https://github.com/0TheMagik)| 2306266956 |
+
+## Version Unity
+2022.3.49f1
