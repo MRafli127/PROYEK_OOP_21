@@ -16,7 +16,7 @@ Pemain harus berhati-hati dalam merencanakan langkahnya, karena papan bisa menja
 
 
 ## **Authors ✍️**
-| Group PA16 Members | Student Number |
+| Group 21  | Student Number |
 | :----------------: | :------------: |
 | [**@Muhamad Rey Kafaka Fadlan**](https://github.com/MuhamadReyKF)| 2306250573 |
 | [**@Raddief Ezra Satrio Andaru**](https://github.com/Raddief)| 2306250693 |
